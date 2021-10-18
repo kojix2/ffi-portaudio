@@ -13,6 +13,11 @@ jobs:
         ruby: [ '2.6', '2.7', '3.0' ]
     runs-on: ${{ matrix.os }}-latest
     steps:
+      - name: Set up portaudio (ubuntu)
+        if: ${{ matrix.os == 'ubuntu' }}
+        run: |
+          sudo apt update -y
+          sudo apt install -y -V portaudio19-dev
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
         with:
